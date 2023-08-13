@@ -27,7 +27,7 @@ export default function Home() {
     }, []);
 
     const getUsers = async () => {
-        let res = await axios.get(`${BACKEND_URL}/user/`);
+        let res = await axios.get(`${BACKEND_URL}/users/`);
         setUsers(res.data);
     }
 
@@ -38,13 +38,13 @@ export default function Home() {
 
     const handleCreateUser = async () => {
         try {
-            let res = await axios.post(`${BACKEND_URL}/user/`, { username: username });
+            let res = await axios.post(`${BACKEND_URL}/users/`, { username: username });
             setUser(res.data);
             await getUsers();    
         } catch (err: any) {
             Swal.fire({
                 title: 'Error',
-                text: `${err.response.data.message}`,
+                text: `${err.response.data.message  ?? err.response.status}`,
                 icon: 'error',
                 confirmButtonText: 'Okay'
             });
@@ -53,13 +53,13 @@ export default function Home() {
 
     const handleGetUser = async () => {
         try {
-            let res = await axios.get(`${BACKEND_URL}/user/${username}`);
+            let res = await axios.get(`${BACKEND_URL}/users/${username}`);
             console.log(res.data);
             setUser(res.data);                
         } catch (err: any) {
             Swal.fire({
                 title: 'Error',
-                text: `${err.response.data.message}`,
+                text: `${err.response.data.message ?? err.response.status}`,
                 icon: 'error',
                 confirmButtonText: 'Okay'
             });
@@ -98,7 +98,7 @@ export default function Home() {
     const handleCreateTransaction = async () => {
         try {
             let res = await axios.post(
-                `http://localhost:3001/transactions/`,
+                `${BACKEND_URL}/transactions/`,
                 {
                     from: fromUser,
                     to: toUser,
@@ -106,7 +106,8 @@ export default function Home() {
                 }
             );
         setTransaction(res.data);
-        await getTransactions();                      
+        await getUsers();                   
+        await getTransactions();
         } catch (err: any) {
             Swal.fire({
                 title: 'Error',
@@ -121,6 +122,7 @@ export default function Home() {
         if (transaction !== null) {
             return (
                 <tr>
+                    <td>{transaction._id}</td>
                     <td>{transaction.from}</td>
                     <td>{transaction.to}</td>
                     <td>{transaction.amount}</td>
@@ -188,6 +190,7 @@ export default function Home() {
                         <caption>Transactions</caption>
                         <thead>
                             <tr>
+                                <th>Transaction ID</th>
                                 <th>From User</th>
                                 <th>To User</th>
                                 <th>Amount</th>
@@ -196,11 +199,12 @@ export default function Home() {
                         </thead>
                         <tbody>
                             {transactions.map((transaction: any) => (
-                                <tr>
-                                <td>{transaction.from}</td>
-                                <td>{transaction.to}</td>
-                                <td>{transaction.amount}</td>
-                                <td>{transaction.createdAt}</td>
+                                <tr key={transaction._id}>
+                                    <td>{transaction._id}</td>
+                                    <td>{transaction.from}</td>
+                                    <td>{transaction.to}</td>
+                                    <td>{transaction.amount}</td>
+                                    <td>{transaction.createdAt}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -257,6 +261,7 @@ export default function Home() {
                         <caption>Create Transaction Response:</caption>
                         <thead>
                             <tr>
+                                <th>Transaction ID</th>
                                 <th>From User</th>
                                 <th>To User</th>
                                 <th>Amount</th>
@@ -279,7 +284,7 @@ export default function Home() {
                         </thead>
                         <tbody>
                             {users.map((user: any) => (
-                                <tr>
+                                <tr key={user._id}>
                                     <td>{user._id}</td>
                                     <td>{user.username}</td>
                                     <td>{user.balance}</td>

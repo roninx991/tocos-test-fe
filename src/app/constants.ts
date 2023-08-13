@@ -1,1 +1,1 @@
-export const BACKEND_URL = process.env.APP_ENV === 'local' ? 'http://localhost:3001' : "";
+export const BACKEND_URL = 'http://localhost:3001/api';
