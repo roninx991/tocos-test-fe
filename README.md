@@ -38,7 +38,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The project serves as the frontend for Toco Hiring Task. To set up the backend for this application, please follow [this](https://github.com/roninx991/tocos-test-be#readme).
+The project serves as the frontend for Toco Hiring Task.<br/>
+To set up the backend for this application, please follow [this](https://github.com/roninx991/tocos-test-be#readme).<br/>
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). <br/>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
