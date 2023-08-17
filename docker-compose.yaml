@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:4.2
+    container_name: mongo
+    volumes:
+      - $HOME/mongodb/data/db:/data/db
+    networks:
+      - tocos-network
+    ports:
+      - 27017:27017
+
+  tocos-backend:
+    build: .
+    image: tocos-backend:latest
+    depends_on:
+      - mongo
+    environment:
+      PORT: 3001
+      LOG_LEVEL: info
+      MONGODB_URI: mongodb://mongo:27017/tocos
+    networks:
+      - tocos-network
+    ports:
+      - 3001:3001
+
+  tocos-frontend:
+    build: .
+    image: tocos-frontend:latest
+    depends_on:
+      - tocos-backend
+      - mongo
+    environment:
+      - NODE_ENV: dev
+    networks:
+      - tocos-network
+
+networks:
+  tocos-network:
+    driver: bridge
