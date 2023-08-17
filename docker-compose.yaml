@@ -10,16 +10,18 @@ services:
       - tocos-network
     ports:
       - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
 
   tocos-backend:
-    build: .
-    image: tocos-backend:latest
+    image: sangatdas/tocos-backend:latest
     depends_on:
       - mongo
     environment:
       PORT: 3001
       LOG_LEVEL: info
-      MONGODB_URI: mongodb://mongo:27017/tocos
+      MONGODB_URI: mongodb://root:example@mongo:27017/tocos
     networks:
       - tocos-network
     ports:
