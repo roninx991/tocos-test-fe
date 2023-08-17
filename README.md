@@ -39,7 +39,6 @@
 ## About The Project
 
 The project serves as the frontend for Toco Hiring Task.<br/>
-To set up the backend for this application, please follow [this](https://github.com/roninx991/tocos-test-be#readme).<br/>
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). <br/>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -68,18 +67,13 @@ Below you will find steps on how to set up this project locally:
 
 You will need to make sure to have these installed on your system.
 * Node - Please use node version 16.x or above. See [installation](https://nodejs.org/en/download)
+* Docker - Please install docker on your system. See [installation](https://www.docker.com/)
 
 ### Local Setup <a name="local-setup"></a>
 
-First, run the development server:
+Run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+`docker-compose up -d`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
