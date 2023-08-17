@@ -3,7 +3,6 @@
 
 import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Navbar, Container, Tab, Tabs, Form, ButtonGroup, Button, Table } from 'react-bootstrap';
 import tocologo from '../../public/toco-logo.png';
 import Image from 'next/image';
@@ -23,6 +22,7 @@ export default function Home() {
     const [username, setUsername] = useState("");
 
     useEffect(() => {
+        require("bootstrap/dist/js/bootstrap.bundle.min");
         getUsers();
         getTransactions();
     }, []);
